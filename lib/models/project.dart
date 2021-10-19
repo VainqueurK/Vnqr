@@ -4,7 +4,8 @@ class Project {
   String img = "";
   String title = "";
   String desc = "";
-  List<Tags> tags = [];
+  String github = "";
+  Tags tags = Tags([]);
 
-  Project(this.img, this.title, this.desc, this.tags);
+  Project(this.img, this.title, this.desc, this.github, this.tags);
 }

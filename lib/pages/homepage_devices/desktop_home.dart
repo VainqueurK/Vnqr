@@ -1,11 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dev_icons/dev_icons.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vainqueur_2/config/statics.dart';
+import 'package:vainqueur_2/models/project.dart';
+import 'package:vainqueur_2/models/tags.dart';
+import 'package:vainqueur_2/routing/router.dart';
+import 'package:vainqueur_2/routing/routes.dart';
 
 class DesktopHomepage extends StatefulWidget {
   const DesktopHomepage({Key? key}) : super(key: key);
@@ -44,22 +49,71 @@ class _DesktopHomepageState extends State<DesktopHomepage>
 
   bool isContacting = false;
 
-  bool project1Hover = false;
-  bool project2Hover = false;
-  bool project3Hover = false;
-  bool project4Hover = false;
+  bool fakebookHover = false;
+  bool lenderHover = false;
+  bool portfolioHover = false;
+  bool detectorHover = false;
 
   late double projectHeight;
   late double projectWidth;
 
-  late double project2Height;
-  late double project2Width;
+  late double lenderHeight;
+  late double lenderWidth;
 
-  late double project3Height;
-  late double project3Width;
+  late double portfolioHeight;
+  late double portfolioWidth;
 
-  late double project4Height;
-  late double project4Width;
+  late double detectorHeight;
+  late double detectorWidth;
+
+  Project fakebook = Project(
+    'assets/placeholder.jpg',
+    "Fakebook",
+    "Fakebook is a social media application that was written using java and is compatible with android versions 5 and above. The app offers an integrated messaging system where users can communicate with their friends and anybody that they have connected with on the app. The app also has a modern and slick orange colour scheme and allows for a variety of customization options of your personal profile. The app uses Firebase in order to store user details along with messages by that user.",
+    "https://github.com/VainqueurK/Fakebook_re",
+    Tags([
+      "Java",
+      "JavaFX",
+      "Firebase",
+      "Android",
+    ]),
+  );
+
+  Project lender = Project(
+    'assets/placeholder.jpg',
+    "Heavy Machinery Rental System",
+    "This machinery rental management tool will allow for companies who need a specific machine to easily check for its availability, price, specifications and make a rental for a specific time period.",
+    "https://github.com/VainqueurK/Machinary_Lender_System",
+    Tags([
+      "Java",
+      "JavaFX",
+      "JavaxMail",
+    ]),
+  );
+
+  Project portfolio = Project(
+    'assets/placeholder.jpg',
+    "Web Portfolio",
+    "Personal web portfolio",
+    "https://github.com/VainqueurK/PersonalWebsite",
+    Tags([
+      "Flutter",
+      "Dart",
+    ]),
+  );
+
+  Project detector = Project(
+    'assets/placeholder.jpg',
+    "Vehicle Speed Detection",
+    "Final year project, a computer vision and machine learning project to try to estimate the speed of oncoming vehicles from a single video without any information on the environment or camera angles and perspective. Using Visual Studio Code as the text editor/IDE.",
+    "https://github.com/VainqueurK/VideoSpeedEstimator",
+    Tags([
+      "Python",
+      "PyQt5",
+      "YOLOv4",
+      "OpenCV",
+    ]),
+  );
 
   @override
   void initState() {
@@ -859,48 +913,74 @@ class _DesktopHomepageState extends State<DesktopHomepage>
     );
   }
 
-  _project1() {
+  _fakebook() {
     return Center(
       child: InkWell(
-        onTap: () {},
+        onTap: () async {
+          MyRouter().setProject(
+              fakebook); //the project being passed to the router (can be any object)
+
+          MyRouter.router.navigateTo(context, MyRoutes.projectsRoute,
+              transition: TransitionType.cupertino,
+              transitionDuration: const Duration(seconds: 1));
+        },
         onHover: (e) {
           setState(() {
-            project1Hover = !project1Hover;
+            fakebookHover = !fakebookHover;
           });
         },
         child: AnimatedContainer(
-          height: !project1Hover
+          height: !fakebookHover
               ? Statics.DEVICE_HEIGHT(context) * 0.3
               : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !project1Hover
+          width: !fakebookHover
               ? Statics.DEVICE_WIDTH(context) * 0.25
               : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 175),
           child: Container(
+            padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
-                color: Color(0XFFFFdb2d52).withOpacity(0.2),
+                color: Colors.orange.withOpacity(0.2),
                 borderRadius: const BorderRadius.all(Radius.circular(5))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Expanded(child: Container()),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: Statics.DEVICE_WIDTH(context) * 0.01,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: Container()),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: Statics.DEVICE_WIDTH(context) * 0.01,
+                      ),
+                      child: AutoSizeText(
+                        "Learn More",
+                        style: GoogleFonts.getFont(
+                          'Lato',
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0XFFFF3c3252),
+                        ),
+                        minFontSize: 12,
+                      ),
+                    ),
+                    SizedBox(
+                      height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                    ),
+                  ],
+                ),
+                Center(
                   child: AutoSizeText(
-                    "Fakebook",
+                    "Fakebook - Mobile Application",
+                    textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       'Lato',
-                      fontSize: 25,
+                      fontSize: 45,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[200],
+                      color: Color(0XFFFF3c3252),
                     ),
                     minFontSize: 12,
+                    maxLines: 2,
                   ),
-                ),
-                SizedBox(
-                  height: Statics.DEVICE_HEIGHT(context) * 0.01,
                 ),
               ],
             ),
@@ -910,153 +990,220 @@ class _DesktopHomepageState extends State<DesktopHomepage>
     );
   }
 
-  _project2() {
+  _lender() {
     return Center(
       child: InkWell(
-        onTap: () {},
+        onTap: () async {
+          MyRouter().setProject(
+              lender); //the project being passed to the router (can be any object)
+
+          MyRouter.router.navigateTo(context, MyRoutes.projectsRoute,
+              transition: TransitionType.cupertino,
+              transitionDuration: const Duration(seconds: 1));
+        },
         onHover: (e) {
           setState(() {
-            project2Hover = !project2Hover;
+            lenderHover = !lenderHover;
           });
         },
         child: AnimatedContainer(
-          height: !project2Hover
+          height: !lenderHover
               ? Statics.DEVICE_HEIGHT(context) * 0.3
               : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !project2Hover
+          width: !lenderHover
               ? Statics.DEVICE_WIDTH(context) * 0.25
               : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 300),
-          child: Container(
-            decoration: BoxDecoration(
-                color: Color(0XFFFFdb2d52).withOpacity(0.4),
-                borderRadius: const BorderRadius.all(Radius.circular(5))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: Container()),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: Statics.DEVICE_WIDTH(context) * 0.01,
-                  ),
-                  child: AutoSizeText(
-                    "Heavy Machinary Lending System",
-                    style: GoogleFonts.getFont(
-                      'Lato',
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[200],
+          duration: const Duration(milliseconds: 175),
+          color: Colors.green.withOpacity(0.2),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: Container()),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: Statics.DEVICE_WIDTH(context) * 0.01,
                     ),
-                    minFontSize: 12,
+                    child: AutoSizeText(
+                      "Learn More.",
+                      style: GoogleFonts.getFont(
+                        'Lato',
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0XFFFF3c3252),
+                      ),
+                      minFontSize: 12,
+                    ),
                   ),
+                  SizedBox(
+                    height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                  ),
+                ],
+              ),
+              Center(
+                child: AutoSizeText(
+                  "Heavy Machinary Lending System",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.getFont(
+                    'Lato',
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0XFFFF3c3252),
+                  ),
+                  minFontSize: 12,
+                  maxLines: 2,
                 ),
-                SizedBox(
-                  height: Statics.DEVICE_HEIGHT(context) * 0.01,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  _project3() {
+  _portfolio() {
     return Center(
       child: InkWell(
-        onTap: () {},
+        onTap: () async {
+          MyRouter().setProject(
+              portfolio); //the project being passed to the router (can be any object)
+
+          MyRouter.router.navigateTo(context, MyRoutes.projectsRoute,
+              transition: TransitionType.cupertino,
+              transitionDuration: const Duration(seconds: 1));
+        },
         onHover: (e) {
           setState(() {
-            project3Hover = !project3Hover;
+            portfolioHover = !portfolioHover;
           });
         },
         child: AnimatedContainer(
-          height: !project3Hover
+          height: !portfolioHover
               ? Statics.DEVICE_HEIGHT(context) * 0.3
               : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !project3Hover
+          width: !portfolioHover
               ? Statics.DEVICE_WIDTH(context) * 0.25
               : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 300),
-          child: Container(
-            decoration: BoxDecoration(
-                color: Color(0XFFFFdb2d52).withOpacity(0.6),
-                borderRadius: const BorderRadius.all(Radius.circular(5))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: Container()),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: Statics.DEVICE_WIDTH(context) * 0.01,
+          duration: const Duration(milliseconds: 175),
+          color: Colors.blue.withOpacity(0.2),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: Container()),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: Statics.DEVICE_WIDTH(context) * 0.01,
+                    ),
+                    child: AutoSizeText(
+                      "Learn More.",
+                      style: GoogleFonts.getFont(
+                        'Lato',
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0XFFFF3c3252),
+                      ),
+                      minFontSize: 12,
+                      maxLines: 1,
+                    ),
                   ),
+                  SizedBox(
+                    height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                  ),
+                ],
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: AutoSizeText(
-                    "Web Portfolio",
+                    "Portfolio Website",
+                    textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       'Lato',
-                      fontSize: 25,
+                      fontSize: 45,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[200],
+                      color: Color(0XFFFF3c3252),
                     ),
                     minFontSize: 12,
+                    maxLines: 2,
                   ),
                 ),
-                SizedBox(
-                  height: Statics.DEVICE_HEIGHT(context) * 0.01,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  _project4() {
+  _detector() {
     return Center(
       child: InkWell(
-        onTap: () {},
+        onTap: () async {
+          MyRouter().setProject(
+              detector); //the project being passed to the router (can be any object)
+
+          MyRouter.router.navigateTo(context, MyRoutes.projectsRoute,
+              transition: TransitionType.cupertino,
+              transitionDuration: const Duration(seconds: 1));
+        },
         onHover: (e) {
           setState(() {
-            project4Hover = !project4Hover;
+            detectorHover = !detectorHover;
           });
         },
         child: AnimatedContainer(
-          height: !project4Hover
+          height: !detectorHover
               ? Statics.DEVICE_HEIGHT(context) * 0.3
               : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !project4Hover
+          width: !detectorHover
               ? Statics.DEVICE_WIDTH(context) * 0.25
               : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 300),
-          child: Container(
-            decoration: BoxDecoration(
-                color: Color(0XFFFFdb2d52).withOpacity(0.8),
-                borderRadius: const BorderRadius.all(Radius.circular(5))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: Container()),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: Statics.DEVICE_WIDTH(context) * 0.01,
-                  ),
-                  child: AutoSizeText(
-                    "Video Speed Detector",
-                    style: GoogleFonts.getFont(
-                      'Lato',
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[200],
+          duration: const Duration(milliseconds: 175),
+          color: Colors.pink.withOpacity(0.2),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: Container()),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: Statics.DEVICE_WIDTH(context) * 0.01,
                     ),
-                    minFontSize: 12,
+                    child: AutoSizeText(
+                      "Learn More.",
+                      style: GoogleFonts.getFont(
+                        'Lato',
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0XFFFF3c3252),
+                      ),
+                      minFontSize: 12,
+                    ),
                   ),
+                  SizedBox(
+                    height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                  ),
+                ],
+              ),
+              Center(
+                child: AutoSizeText(
+                  "Computer Vision - Vechical Speed Estimator",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.getFont(
+                    'Lato',
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0XFFFF3c3252),
+                  ),
+                  minFontSize: 12,
+                  maxLines: 2,
                 ),
-                SizedBox(
-                  height: Statics.DEVICE_HEIGHT(context) * 0.01,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -1071,10 +1218,10 @@ class _DesktopHomepageState extends State<DesktopHomepage>
           child: Row(
             children: [
               Expanded(
-                child: _project1(),
+                child: _fakebook(),
               ),
               Expanded(
-                child: _project2(),
+                child: _lender(),
               ),
             ],
           ),
@@ -1084,10 +1231,10 @@ class _DesktopHomepageState extends State<DesktopHomepage>
           child: Row(
             children: [
               Expanded(
-                child: _project3(),
+                child: _portfolio(),
               ),
               Expanded(
-                child: _project4(),
+                child: _detector(),
               ),
             ],
           ),
