@@ -107,7 +107,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
   );
 
   Project portfolio = Project(
-    'assets/WebPortfolio.jpg',
+    'assets/WebPortfolio.png',
     "Web Portfolio",
     "Personal web portfolio",
     "https://github.com/VainqueurK/PersonalWebsite",
@@ -219,15 +219,19 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                                     ),
                                   ],
                                 ),
-                                AutoSizeText(
-                                  "I'm Vainqueur Kayombo",
-                                  style: GoogleFonts.getFont(
-                                    'Lato',
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0XFFFF3c3252),
-                                  ),
-                                  maxLines: 1,
+                                Row(
+                                  children: [
+                                    AutoSizeText(
+                                      "I'm Vainqueur Kayombo",
+                                      style: GoogleFonts.getFont(
+                                        'Lato',
+                                        fontSize: 60,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0XFFFF3c3252),
+                                      ),
+                                      maxLines: 1,
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: Statics.DEVICE_HEIGHT(context) * 0.01,
@@ -356,114 +360,119 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 ],
               ),
             ),
-            Material(
-              elevation: 15,
-              child: Container(
-                constraints: const BoxConstraints(
-                  minHeight: 100,
-                ),
-                padding: EdgeInsets.only(
-                  left: Statics.DEVICE_WIDTH(context) * 0.2,
-                  right: Statics.DEVICE_WIDTH(context) * 0.2,
-                ),
-                height: Statics.DEVICE_HEIGHT(context) * 0.07,
-                width: Statics.DEVICE_WIDTH(context),
-                decoration: const BoxDecoration(
-                  color: Color(0XFFFF3c3252),
-                ),
-                child: Row(
-                  children: [
-                    _title(),
-                    const FaIcon(
-                      FontAwesomeIcons.rocket,
-                      color: Color(0xffffdb2d52),
-                    ),
-                    const Expanded(
-                      child: SizedBox(),
-                    ),
-                    InkWell(
-                      onTap: () => Scrollable.ensureVisible(
-                        aboutKey.currentContext!,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeInOut,
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 250),
+              opacity: _showBackToTopButton ? 0 : 1,
+              child: Material(
+                elevation: 15,
+                child: Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 100,
+                  ),
+                  padding: EdgeInsets.only(
+                    left: Statics.DEVICE_WIDTH(context) * 0.2,
+                    right: Statics.DEVICE_WIDTH(context) * 0.2,
+                  ),
+                  height: Statics.DEVICE_HEIGHT(context) * 0.07,
+                  width: Statics.DEVICE_WIDTH(context),
+                  decoration: const BoxDecoration(
+                    color: Color(0XFFFF3c3252),
+                  ),
+                  child: Row(
+                    children: [
+                      _title(),
+                      const FaIcon(
+                        FontAwesomeIcons.rocket,
+                        color: Color(0xffffdb2d52),
                       ),
-                      onHover: (hover) {
-                        setState(() {
-                          aboutButton = hover ? hoverColor3 : normalColor2;
-                        });
-                      },
-                      child: _aboutNavButton(),
-                    ),
-                    SizedBox(
-                      width: Statics.DEVICE_WIDTH(context) * 0.02,
-                    ),
-                    InkWell(
-                      onTap: () => Scrollable.ensureVisible(
-                        projectKey.currentContext!,
-                        duration: const Duration(seconds: 2),
-                        curve: Curves.easeInOut,
+                      const Expanded(
+                        child: SizedBox(),
                       ),
-                      onHover: (hover) {
-                        setState(() {
-                          projects2Button = hover ? hoverColor3 : normalColor2;
-                        });
-                      },
-                      child: _projectsNavButton(),
-                    ),
-                    SizedBox(
-                      width: Statics.DEVICE_WIDTH(context) * 0.02,
-                    ),
-                    Center(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isContacting = true;
-                          });
-                        },
+                      InkWell(
+                        onTap: () => Scrollable.ensureVisible(
+                          aboutKey.currentContext!,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeInOut,
+                        ),
                         onHover: (hover) {
                           setState(() {
-                            contactButton = hover ? hoverColor : normalColor;
+                            aboutButton = hover ? hoverColor3 : normalColor2;
                           });
                         },
-                        child: Container(
-                          height: Statics.DEVICE_HEIGHT(context) * 0.04,
-                          width: Statics.DEVICE_WIDTH(context) * 0.07,
-                          constraints: const BoxConstraints(
-                              minHeight: 50, minWidth: 100),
-                          decoration: BoxDecoration(
-                            color: contactButton,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(50)),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 20,
-                                  color: Colors.black.withOpacity(0.3),
-                                  spreadRadius: 2)
-                            ],
-                          ),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: AutoSizeText(
-                                "Contact Me",
-                                style: GoogleFonts.getFont(
-                                  'Lato',
-                                  fontSize: 18,
-                                  color: Colors.grey[200],
-                                  fontWeight: FontWeight.bold,
+                        child: _aboutNavButton(),
+                      ),
+                      SizedBox(
+                        width: Statics.DEVICE_WIDTH(context) * 0.02,
+                      ),
+                      InkWell(
+                        onTap: () => Scrollable.ensureVisible(
+                          projectKey.currentContext!,
+                          duration: const Duration(seconds: 2),
+                          curve: Curves.easeInOut,
+                        ),
+                        onHover: (hover) {
+                          setState(() {
+                            projects2Button =
+                                hover ? hoverColor3 : normalColor2;
+                          });
+                        },
+                        child: _projectsNavButton(),
+                      ),
+                      SizedBox(
+                        width: Statics.DEVICE_WIDTH(context) * 0.02,
+                      ),
+                      Center(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              isContacting = true;
+                            });
+                          },
+                          onHover: (hover) {
+                            setState(() {
+                              contactButton = hover ? hoverColor : normalColor;
+                            });
+                          },
+                          child: Container(
+                            height: Statics.DEVICE_HEIGHT(context) * 0.04,
+                            width: Statics.DEVICE_WIDTH(context) * 0.07,
+                            constraints: const BoxConstraints(
+                                minHeight: 50, minWidth: 100),
+                            decoration: BoxDecoration(
+                              color: contactButton,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(50)),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 20,
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 2)
+                              ],
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: AutoSizeText(
+                                  "Contact Me",
+                                  style: GoogleFonts.getFont(
+                                    'Lato',
+                                    fontSize: 18,
+                                    color: Colors.grey[200],
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  minFontSize: 12,
+                                  maxLines: 1,
                                 ),
-                                minFontSize: 12,
-                                maxLines: 1,
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: Statics.DEVICE_WIDTH(context) * 0.01,
-                    ),
-                  ],
+                      SizedBox(
+                        width: Statics.DEVICE_WIDTH(context) * 0.01,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

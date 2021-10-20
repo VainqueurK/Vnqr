@@ -159,7 +159,7 @@ class _MobileHomepageState extends State<MobileHomepage>
                   Container(
                     key: splashKey,
                     margin: EdgeInsets.only(
-                        top: Statics.DEVICE_HEIGHT(context) * 0.06),
+                        top: Statics.DEVICE_HEIGHT(context) * 0.05),
                     padding: EdgeInsets.only(
                       left: Statics.DEVICE_WIDTH(context) * 0.1,
                       right: Statics.DEVICE_WIDTH(context) * 0.1,
@@ -171,115 +171,113 @@ class _MobileHomepageState extends State<MobileHomepage>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                            top: Statics.DEVICE_HEIGHT(context) * 0.15,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  AutoSizeText(
-                                    "Hi!",
-                                    style: GoogleFonts.getFont(
-                                      'Lato',
-                                      fontSize: 55,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0XFFFF3c3252),
-                                    ),
-                                    minFontSize: 10,
-                                    maxLines: 1,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: Statics.DEVICE_HEIGHT(context) * 0.08,
+                            ),
+                            Row(
+                              children: [
+                                AutoSizeText(
+                                  "Hi!",
+                                  style: GoogleFonts.getFont(
+                                    'Lato',
+                                    fontSize: 45,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0XFFFF3c3252),
                                   ),
-                                  Center(
-                                    child: RotationTransition(
-                                      turns: _animation,
-                                      child: const FaIcon(
-                                        FontAwesomeIcons.handSparkles,
-                                        color: Color(0xffffdb2d52),
-                                        size: 30,
-                                      ),
+                                  minFontSize: 10,
+                                  maxLines: 1,
+                                ),
+                                Center(
+                                  child: RotationTransition(
+                                    turns: _animation,
+                                    child: const FaIcon(
+                                      FontAwesomeIcons.handSparkles,
+                                      color: Color(0xffffdb2d52),
+                                      size: 30,
                                     ),
                                   ),
-                                ],
-                              ),
-                              AutoSizeText(
-                                "I'm Vainqueur Kayombo",
-                                style: GoogleFonts.getFont(
-                                  'Lato',
-                                  fontSize: 65,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0XFFFF3c3252),
                                 ),
-                                maxLines: 1,
+                              ],
+                            ),
+                            AutoSizeText(
+                              "I'm Vainqueur Kayombo",
+                              style: GoogleFonts.getFont(
+                                'Lato',
+                                fontSize: 65,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0XFFFF3c3252),
                               ),
-                              SizedBox(
-                                height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                              maxLines: 1,
+                              minFontSize: 1,
+                            ),
+                            SizedBox(
+                              height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                            ),
+                            AutoSizeText(
+                              "Software Developer",
+                              style: GoogleFonts.getFont(
+                                'Lato',
+                                fontSize: 35,
+                                color: Color(0XFFFFdb2d52),
+                                fontWeight: FontWeight.bold,
                               ),
-                              AutoSizeText(
-                                "Software Developer",
-                                style: GoogleFonts.getFont(
-                                  'Lato',
-                                  fontSize: 35,
-                                  color: Color(0XFFFFdb2d52),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                maxLines: 1,
-                              ),
-                              SizedBox(
-                                height: Statics.DEVICE_HEIGHT(context) * 0.075,
-                              ),
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () => Scrollable.ensureVisible(
-                                      projectKey.currentContext!,
-                                      duration: Duration(seconds: 2),
-                                      curve: Curves.easeInOut,
+                              maxLines: 1,
+                            ),
+                            SizedBox(
+                              height: Statics.DEVICE_HEIGHT(context) * 0.075,
+                            ),
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () => Scrollable.ensureVisible(
+                                    projectKey.currentContext!,
+                                    duration: Duration(seconds: 2),
+                                    curve: Curves.easeInOut,
+                                  ),
+                                  onHover: (hover) {
+                                    setState(() {
+                                      projectsButton =
+                                          hover ? hoverColor : normalColor;
+                                    });
+                                  },
+                                  child: Container(
+                                    height:
+                                        Statics.DEVICE_HEIGHT(context) * 0.04,
+                                    width: Statics.DEVICE_WIDTH(context) * 0.1,
+                                    constraints: const BoxConstraints(
+                                        minHeight: 35, minWidth: 175),
+                                    decoration: BoxDecoration(
+                                      color: projectsButton,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(50)),
                                     ),
-                                    onHover: (hover) {
-                                      setState(() {
-                                        projectsButton =
-                                            hover ? hoverColor : normalColor;
-                                      });
-                                    },
-                                    child: Container(
-                                      height:
-                                          Statics.DEVICE_HEIGHT(context) * 0.04,
-                                      width:
-                                          Statics.DEVICE_WIDTH(context) * 0.1,
-                                      constraints: const BoxConstraints(
-                                          minHeight: 35, minWidth: 175),
-                                      decoration: BoxDecoration(
-                                        color: projectsButton,
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(50)),
-                                      ),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: AutoSizeText(
-                                            "My Projects",
-                                            style: GoogleFonts.getFont(
-                                              'Lato',
-                                              fontSize: 24,
-                                              color: Colors.grey[200],
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                            minFontSize: 12,
-                                            maxLines: 1,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: AutoSizeText(
+                                          "My Projects",
+                                          style: GoogleFonts.getFont(
+                                            'Lato',
+                                            fontSize: 24,
+                                            color: Colors.grey[200],
+                                            fontWeight: FontWeight.bold,
                                           ),
+                                          minFontSize: 12,
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: Statics.DEVICE_WIDTH(context) * 0.01,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                                SizedBox(
+                                  width: Statics.DEVICE_WIDTH(context) * 0.01,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: Statics.DEVICE_HEIGHT(context) * 0.075,
@@ -318,36 +316,41 @@ class _MobileHomepageState extends State<MobileHomepage>
                 ],
               ),
             ),
-            Material(
-              elevation: 15,
-              child: Container(
-                constraints: const BoxConstraints(
-                  minHeight: 100,
-                ),
-                padding: EdgeInsets.only(
-                  left: Statics.DEVICE_WIDTH(context) * 0.1,
-                  right: Statics.DEVICE_WIDTH(context) * 0.1,
-                ),
-                height: Statics.DEVICE_HEIGHT(context) * 0.07,
-                width: Statics.DEVICE_WIDTH(context),
-                decoration: const BoxDecoration(
-                  color: Color(0XFFFF3c3252),
-                ),
-                child: Row(
-                  children: [
-                    _title(),
-                    const FaIcon(
-                      FontAwesomeIcons.rocket,
-                      color: Color(0xffffdb2d52),
-                    ),
-                    const Expanded(
-                      child: SizedBox(),
-                    ),
-                    //ADD THE MENU BUTTON HERE
-                    SizedBox(
-                      width: Statics.DEVICE_WIDTH(context) * 0.01,
-                    ),
-                  ],
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 250),
+              opacity: _showBackToTopButton ? 0 : 1,
+              child: Material(
+                elevation: 15,
+                child: Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 10,
+                  ),
+                  padding: EdgeInsets.only(
+                    left: Statics.DEVICE_WIDTH(context) * 0.1,
+                    right: Statics.DEVICE_WIDTH(context) * 0.1,
+                  ),
+                  height: Statics.DEVICE_HEIGHT(context) * 0.05,
+                  width: Statics.DEVICE_WIDTH(context),
+                  decoration: const BoxDecoration(
+                    color: Color(0XFFFF3c3252),
+                  ),
+                  child: Row(
+                    children: [
+                      _title(),
+                      const FaIcon(
+                        FontAwesomeIcons.rocket,
+                        color: Color(0xffffdb2d52),
+                        size: 20,
+                      ),
+                      const Expanded(
+                        child: SizedBox(),
+                      ),
+                      //ADD THE MENU BUTTON HERE
+                      SizedBox(
+                        width: Statics.DEVICE_WIDTH(context) * 0.01,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -1173,7 +1176,7 @@ class _MobileHomepageState extends State<MobileHomepage>
       child: AutoSizeText(
         "Vnqr",
         style: GoogleFonts.getFont('Lato',
-            fontSize: 36, color: Colors.grey[200], fontWeight: FontWeight.bold),
+            fontSize: 24, color: Colors.grey[200], fontWeight: FontWeight.bold),
         minFontSize: 12,
       ),
     );

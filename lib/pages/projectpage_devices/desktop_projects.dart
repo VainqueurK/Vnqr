@@ -167,7 +167,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                   left: Statics.DEVICE_WIDTH(context) * 0.2,
                   right: Statics.DEVICE_WIDTH(context) * 0.2,
                 ),
-                height: Statics.DEVICE_HEIGHT(context) * 0.02,
+                height: Statics.DEVICE_HEIGHT(context) * 0.015,
                 width: Statics.DEVICE_WIDTH(context),
                 decoration: const BoxDecoration(
                   color: Color(0XFFFF3c3252),

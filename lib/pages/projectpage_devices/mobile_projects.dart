@@ -157,13 +157,13 @@ class _MobileProjectsPageState extends State<MobileProjectsPage> {
               elevation: 15,
               child: Container(
                 constraints: const BoxConstraints(
-                  minHeight: 75,
+                  minHeight: 10,
                 ),
                 padding: EdgeInsets.only(
                   left: Statics.DEVICE_WIDTH(context) * 0.1,
                   right: Statics.DEVICE_WIDTH(context) * 0.1,
                 ),
-                height: Statics.DEVICE_HEIGHT(context) * 0.02,
+                height: Statics.DEVICE_HEIGHT(context) * 0.05,
                 width: Statics.DEVICE_WIDTH(context),
                 decoration: const BoxDecoration(
                   color: Color(0XFFFF3c3252),
@@ -193,7 +193,7 @@ class _MobileProjectsPageState extends State<MobileProjectsPage> {
                             "Home",
                             style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 30,
+                              fontSize: 25,
                               color: returnButton,
                             ),
                           ),
