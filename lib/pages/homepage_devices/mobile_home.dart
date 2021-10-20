@@ -11,16 +11,15 @@ import 'package:vainqueur_2/models/project.dart';
 import 'package:vainqueur_2/models/tags.dart';
 import 'package:vainqueur_2/routing/router.dart';
 import 'package:vainqueur_2/routing/routes.dart';
-import 'package:mailto/mailto.dart';
 
-class DesktopHomepage extends StatefulWidget {
-  const DesktopHomepage({Key? key}) : super(key: key);
+class MobileHomepage extends StatefulWidget {
+  const MobileHomepage({Key? key}) : super(key: key);
 
   @override
-  _DesktopHomepageState createState() => _DesktopHomepageState();
+  _MobileHomepageState createState() => _MobileHomepageState();
 }
 
-class _DesktopHomepageState extends State<DesktopHomepage>
+class _MobileHomepageState extends State<MobileHomepage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _waveController;
   late final Animation<double> _animation = CurvedAnimation(
@@ -30,9 +29,6 @@ class _DesktopHomepageState extends State<DesktopHomepage>
 
   Color? gitIconTextColor = Colors.grey[300];
   Color? linkedInIconTextColor = Colors.grey[300];
-  Color? gitIconTextColor2 = Color(0xffffdb2d52);
-  Color? linkedInIconTextColor2 = Color(0xffffdb2d52);
-
   Color? contactButton = Color(0xffffdb2d52);
   Color? projectsButton = Color(0xffffdb2d52);
   Color? resumeButton = Colors.grey[300];
@@ -74,13 +70,6 @@ class _DesktopHomepageState extends State<DesktopHomepage>
 
   late ScrollController _scrollController;
 
-  final mailtoLink = Mailto(
-    to: ['vainqueurkk@gmail.com'],
-    subject: 'Vnqr: Contact',
-    body:
-        '[Please let me know the reason for contact. Thanks for your time.] [replace entire body with with message]',
-  );
-
   Project fakebook = Project(
     'assets/fakebook1.jpg',
     "Fakebook",
@@ -107,7 +96,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
   );
 
   Project portfolio = Project(
-    'assets/WebPortfolio.jpg',
+    'assets/WebPortfolio.png',
     "Web Portfolio",
     "Personal web portfolio",
     "https://github.com/VainqueurK/PersonalWebsite",
@@ -133,11 +122,10 @@ class _DesktopHomepageState extends State<DesktopHomepage>
   @override
   void initState() {
     super.initState();
-
     _scrollController = ScrollController()
       ..addListener(() {
         setState(() {
-          if (_scrollController.offset >= 750) {
+          if (_scrollController.offset >= 600) {
             _showBackToTopButton = true; // show the back-to-top button
           } else {
             _showBackToTopButton = false; // hide the back-to-top button
@@ -158,7 +146,6 @@ class _DesktopHomepageState extends State<DesktopHomepage>
 
   @override
   Widget build(BuildContext context) {
-    double iconSize = 50;
     return Scaffold(
       body: SizedBox(
         height: Statics.DEVICE_HEIGHT(context),
@@ -174,167 +161,147 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                     margin: EdgeInsets.only(
                         top: Statics.DEVICE_HEIGHT(context) * 0.06),
                     padding: EdgeInsets.only(
-                      left: Statics.DEVICE_WIDTH(context) * 0.2,
-                      right: Statics.DEVICE_WIDTH(context) * 0.2,
+                      left: Statics.DEVICE_WIDTH(context) * 0.1,
+                      right: Statics.DEVICE_WIDTH(context) * 0.1,
                     ),
                     height: Statics.DEVICE_HEIGHT(context) -
                         Statics.DEVICE_HEIGHT(context) * 0.06,
                     width: Statics.DEVICE_WIDTH(context),
                     color: Colors.grey[200],
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: Statics.DEVICE_HEIGHT(context) * 0.25,
+                          padding: EdgeInsets.only(
+                            top: Statics.DEVICE_HEIGHT(context) * 0.15,
                           ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: Statics.DEVICE_HEIGHT(context) * 0.01,
-                                ),
-                                Row(
-                                  children: [
-                                    AutoSizeText(
-                                      "Hi!",
-                                      style: GoogleFonts.getFont(
-                                        'Lato',
-                                        fontSize: 60,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0XFFFF3c3252),
-                                      ),
-                                      maxLines: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  AutoSizeText(
+                                    "Hi!",
+                                    style: GoogleFonts.getFont(
+                                      'Lato',
+                                      fontSize: 55,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0XFFFF3c3252),
                                     ),
-                                    Center(
-                                      child: RotationTransition(
-                                        turns: _animation,
-                                        child: const FaIcon(
-                                          FontAwesomeIcons.handSparkles,
-                                          color: Color(0xffffdb2d52),
-                                          size: 45,
-                                        ),
+                                    minFontSize: 10,
+                                    maxLines: 1,
+                                  ),
+                                  Center(
+                                    child: RotationTransition(
+                                      turns: _animation,
+                                      child: const FaIcon(
+                                        FontAwesomeIcons.handSparkles,
+                                        color: Color(0xffffdb2d52),
+                                        size: 30,
                                       ),
                                     ),
-                                  ],
-                                ),
-                                AutoSizeText(
-                                  "I'm Vainqueur Kayombo",
-                                  style: GoogleFonts.getFont(
-                                    'Lato',
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0XFFFF3c3252),
                                   ),
-                                  maxLines: 1,
+                                ],
+                              ),
+                              AutoSizeText(
+                                "I'm Vainqueur Kayombo",
+                                style: GoogleFonts.getFont(
+                                  'Lato',
+                                  fontSize: 65,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0XFFFF3c3252),
                                 ),
-                                SizedBox(
-                                  height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                                maxLines: 1,
+                              ),
+                              SizedBox(
+                                height: Statics.DEVICE_HEIGHT(context) * 0.01,
+                              ),
+                              AutoSizeText(
+                                "Software Developer",
+                                style: GoogleFonts.getFont(
+                                  'Lato',
+                                  fontSize: 35,
+                                  color: Color(0XFFFFdb2d52),
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                AutoSizeText(
-                                  "Software Developer",
-                                  style: GoogleFonts.getFont(
-                                    'Lato',
-                                    fontSize: 30,
-                                    color: Color(0XFFFFdb2d52),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  minFontSize: 12,
-                                  maxLines: 1,
-                                ),
-                                SizedBox(
-                                  height:
-                                      Statics.DEVICE_HEIGHT(context) * 0.075,
-                                ),
-                                Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () => Scrollable.ensureVisible(
-                                        projectKey.currentContext!,
-                                        duration: Duration(seconds: 2),
-                                        curve: Curves.easeInOut,
+                                maxLines: 1,
+                              ),
+                              SizedBox(
+                                height: Statics.DEVICE_HEIGHT(context) * 0.075,
+                              ),
+                              Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () => Scrollable.ensureVisible(
+                                      projectKey.currentContext!,
+                                      duration: Duration(seconds: 2),
+                                      curve: Curves.easeInOut,
+                                    ),
+                                    onHover: (hover) {
+                                      setState(() {
+                                        projectsButton =
+                                            hover ? hoverColor : normalColor;
+                                      });
+                                    },
+                                    child: Container(
+                                      height:
+                                          Statics.DEVICE_HEIGHT(context) * 0.04,
+                                      width:
+                                          Statics.DEVICE_WIDTH(context) * 0.1,
+                                      constraints: const BoxConstraints(
+                                          minHeight: 35, minWidth: 175),
+                                      decoration: BoxDecoration(
+                                        color: projectsButton,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(50)),
                                       ),
-                                      onHover: (hover) {
-                                        setState(() {
-                                          projectsButton =
-                                              hover ? hoverColor : normalColor;
-                                        });
-                                      },
-                                      child: Container(
-                                        height: Statics.DEVICE_HEIGHT(context) *
-                                            0.04,
-                                        width:
-                                            Statics.DEVICE_WIDTH(context) * 0.1,
-                                        constraints: const BoxConstraints(
-                                            minHeight: 50, minWidth: 100),
-                                        decoration: BoxDecoration(
-                                          color: projectsButton,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(50)),
-                                        ),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: AutoSizeText(
-                                              "My Projects",
-                                              style: GoogleFonts.getFont(
-                                                'Lato',
-                                                fontSize: 24,
-                                                color: Colors.grey[200],
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                              minFontSize: 12,
-                                              maxLines: 1,
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: AutoSizeText(
+                                            "My Projects",
+                                            style: GoogleFonts.getFont(
+                                              'Lato',
+                                              fontSize: 24,
+                                              color: Colors.grey[200],
+                                              fontWeight: FontWeight.bold,
                                             ),
+                                            minFontSize: 12,
+                                            maxLines: 1,
                                           ),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width:
-                                          Statics.DEVICE_WIDTH(context) * 0.01,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const Expanded(
-                          child: SizedBox(),
-                        ),
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    Statics.DEVICE_WIDTH(context) * 0.015),
-                            child: Container(
-                              //color: Colors.grey[300],
-
-                              margin: EdgeInsets.only(
-                                top: Statics.DEVICE_HEIGHT(context) * 0.15,
-                              ),
-
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 20,
-                                      color: Colors.grey,
-                                      spreadRadius: 2)
+                                  ),
+                                  SizedBox(
+                                    width: Statics.DEVICE_WIDTH(context) * 0.01,
+                                  ),
                                 ],
                               ),
-                              constraints: const BoxConstraints(minHeight: 100),
-                              child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: Statics.DEVICE_WIDTH(context) * 0.1,
-                                  backgroundImage:
-                                      const AssetImage('assets/blast_off.gif')),
-                            ),
+                            ],
                           ),
+                        ),
+                        SizedBox(
+                          height: Statics.DEVICE_HEIGHT(context) * 0.075,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 20,
+                                  color: Colors.grey,
+                                  spreadRadius: 2)
+                            ],
+                          ),
+                          constraints: const BoxConstraints(
+                              minHeight: 100, minWidth: 100),
+                          child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: Statics.DEVICE_HEIGHT(context) * 0.14,
+                              backgroundImage:
+                                  const AssetImage('assets/blast_off.gif')),
                         ),
                       ],
                     ),
@@ -348,11 +315,6 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                     child: _projectScreen(),
                   ),
                   _footerSection(),
-                  // const FaIcon(
-                  //   FontAwesomeIcons.rocket,
-                  //   color: Color(0xffffdb2d52),
-                  //   size: 900,
-                  // ),
                 ],
               ),
             ),
@@ -363,8 +325,8 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                   minHeight: 100,
                 ),
                 padding: EdgeInsets.only(
-                  left: Statics.DEVICE_WIDTH(context) * 0.2,
-                  right: Statics.DEVICE_WIDTH(context) * 0.2,
+                  left: Statics.DEVICE_WIDTH(context) * 0.1,
+                  right: Statics.DEVICE_WIDTH(context) * 0.1,
                 ),
                 height: Statics.DEVICE_HEIGHT(context) * 0.07,
                 width: Statics.DEVICE_WIDTH(context),
@@ -381,85 +343,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                     const Expanded(
                       child: SizedBox(),
                     ),
-                    InkWell(
-                      onTap: () => Scrollable.ensureVisible(
-                        aboutKey.currentContext!,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeInOut,
-                      ),
-                      onHover: (hover) {
-                        setState(() {
-                          aboutButton = hover ? hoverColor3 : normalColor2;
-                        });
-                      },
-                      child: _aboutNavButton(),
-                    ),
-                    SizedBox(
-                      width: Statics.DEVICE_WIDTH(context) * 0.02,
-                    ),
-                    InkWell(
-                      onTap: () => Scrollable.ensureVisible(
-                        projectKey.currentContext!,
-                        duration: const Duration(seconds: 2),
-                        curve: Curves.easeInOut,
-                      ),
-                      onHover: (hover) {
-                        setState(() {
-                          projects2Button = hover ? hoverColor3 : normalColor2;
-                        });
-                      },
-                      child: _projectsNavButton(),
-                    ),
-                    SizedBox(
-                      width: Statics.DEVICE_WIDTH(context) * 0.02,
-                    ),
-                    Center(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isContacting = true;
-                          });
-                        },
-                        onHover: (hover) {
-                          setState(() {
-                            contactButton = hover ? hoverColor : normalColor;
-                          });
-                        },
-                        child: Container(
-                          height: Statics.DEVICE_HEIGHT(context) * 0.04,
-                          width: Statics.DEVICE_WIDTH(context) * 0.07,
-                          constraints: const BoxConstraints(
-                              minHeight: 50, minWidth: 100),
-                          decoration: BoxDecoration(
-                            color: contactButton,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(50)),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 20,
-                                  color: Colors.black.withOpacity(0.3),
-                                  spreadRadius: 2)
-                            ],
-                          ),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: AutoSizeText(
-                                "Contact Me",
-                                style: GoogleFonts.getFont(
-                                  'Lato',
-                                  fontSize: 18,
-                                  color: Colors.grey[200],
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                minFontSize: 12,
-                                maxLines: 1,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    //ADD THE MENU BUTTON HERE
                     SizedBox(
                       width: Statics.DEVICE_WIDTH(context) * 0.01,
                     ),
@@ -488,10 +372,9 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                         duration: const Duration(milliseconds: 400),
                         opacity: _showBackToTopButton ? 1 : 0,
                         child: AnimatedContainer(
-                          curve: Curves.easeInOut,
                           duration: const Duration(milliseconds: 700),
-                          height: _showBackToTopButton ? 100 : 0,
-                          width: _showBackToTopButton ? 100 : 0,
+                          height: _showBackToTopButton ? 70 : 0,
+                          width: _showBackToTopButton ? 70 : 0,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: scrollButton,
@@ -559,86 +442,20 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                         horizontal: Statics.DEVICE_HEIGHT(context) * 0.05,
                         vertical: Statics.DEVICE_WIDTH(context) * 0.04,
                       ),
-                      height: Statics.DEVICE_HEIGHT(context) * 0.275,
-                      width: Statics.DEVICE_WIDTH(context) * 0.25,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () => launch(
-                                'https://www.linkedin.com/in/vainqueur/'),
-                            onHover: (hover) {
-                              setState(() {
-                                linkedInIconTextColor2 =
-                                    hover ? hoverColor : hoverColor3;
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                FittedBox(
-                                  fit: BoxFit.fitHeight,
-                                  child: FaIcon(
-                                    FontAwesomeIcons.linkedin,
-                                    color: linkedInIconTextColor2,
-                                    size: iconSize,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: Statics.DEVICE_WIDTH(context) * 0.01,
-                                ),
-                                AutoSizeText(
-                                  "Send a message ",
-                                  style: GoogleFonts.getFont(
-                                    'Lato',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: linkedInIconTextColor2,
-                                  ),
-                                  maxLines: 1,
-                                ),
-                              ],
-                            ),
+                      height: Statics.DEVICE_HEIGHT(context) * 0.6,
+                      width: Statics.DEVICE_WIDTH(context) * 0.5,
+                      child: Center(
+                        child: AutoSizeText(
+                          "Work In Progress...",
+                          style: GoogleFonts.getFont(
+                            'Lato',
+                            fontSize: 45,
+                            color: normalColor,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(
-                            height: Statics.DEVICE_HEIGHT(context) * 0.025,
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              await launch('$mailtoLink');
-                            },
-                            onHover: (hover) {
-                              setState(() {
-                                gitIconTextColor2 =
-                                    hover ? hoverColor : hoverColor3;
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                FittedBox(
-                                  fit: BoxFit.fitHeight,
-                                  child: FaIcon(
-                                    FontAwesomeIcons.envelope,
-                                    color: gitIconTextColor2,
-                                    size: iconSize,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: Statics.DEVICE_WIDTH(context) * 0.01,
-                                ),
-                                AutoSizeText(
-                                  "Send an email",
-                                  style: GoogleFonts.getFont(
-                                    'Lato',
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: gitIconTextColor2,
-                                  ),
-                                  maxLines: 1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          minFontSize: 12,
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ),
@@ -652,16 +469,16 @@ class _DesktopHomepageState extends State<DesktopHomepage>
   }
 
   _aboutScreen() {
-    double iconSize = 65;
+    double iconSize = 25;
     Color? iconColors = Color(0XFFFF3c3252);
 
     return Container(
       padding: EdgeInsets.only(
         top: Statics.DEVICE_HEIGHT(context) * 0.06,
-        left: Statics.DEVICE_WIDTH(context) * 0.2,
-        right: Statics.DEVICE_WIDTH(context) * 0.2,
+        left: Statics.DEVICE_WIDTH(context) * 0.1,
+        right: Statics.DEVICE_WIDTH(context) * 0.1,
       ),
-      height: Statics.DEVICE_HEIGHT(context) * .7,
+      height: Statics.DEVICE_HEIGHT(context) * 0.9,
       width: Statics.DEVICE_WIDTH(context),
       color: Color(0XFFFFdb2d52), //Color(0XFFFF3c3252), //Color(0XFFFFeeeeee),
 
@@ -675,7 +492,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
             "About",
             style: GoogleFonts.getFont(
               'Lato',
-              fontSize: 45,
+              fontSize: 35,
               fontWeight: FontWeight.bold,
               color: Color(0XFFFFeeeeee),
             ),
@@ -689,12 +506,12 @@ class _DesktopHomepageState extends State<DesktopHomepage>
             "Computer Science graduate from University of Limerick \nand tech enthusiast!",
             style: GoogleFonts.getFont(
               'Lato',
-              fontSize: 32,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
               color: Color(0XFFFFeeeeee),
             ),
-            minFontSize: 12,
-            maxLines: 2,
+            minFontSize: 8,
+            maxLines: 5,
           ),
           SizedBox(
             height: Statics.DEVICE_HEIGHT(context) * 0.05,
@@ -712,7 +529,8 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 child: Container(
                   height: Statics.DEVICE_HEIGHT(context) * 0.04,
                   width: Statics.DEVICE_WIDTH(context) * 0.1,
-                  constraints: BoxConstraints(minHeight: 50, minWidth: 100),
+                  constraints:
+                      const BoxConstraints(minHeight: 35, minWidth: 175),
                   decoration: BoxDecoration(
                     color: resumeButton,
                     borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -724,7 +542,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                         "My Resume",
                         style: GoogleFonts.getFont(
                           'Lato',
-                          fontSize: 24,
+                          fontSize: 22,
                           color: Color(0XFFFF3c3252),
                           fontWeight: FontWeight.bold,
                         ),
@@ -749,7 +567,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
             "Languages I use",
             style: GoogleFonts.getFont(
               'Lato',
-              fontSize: 32,
+              fontSize: 26,
               fontWeight: FontWeight.bold,
               color: Color(0XFFFFeeeeee),
             ),
@@ -780,7 +598,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 child: Center(
                   child: Icon(
                     DevIcons.javaPlainWordmark,
-                    size: iconSize,
+                    size: iconSize + 30,
                     color: iconColors,
                   ),
                 ),
@@ -801,7 +619,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 child: Center(
                   child: Icon(
                     DevIcons.pythonPlainWordmark,
-                    size: iconSize,
+                    size: iconSize + 30,
                     color: iconColors,
                   ),
                 ),
@@ -822,7 +640,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 child: Center(
                   child: Icon(
                     DevIcons.dartPlainWordmark,
-                    size: iconSize,
+                    size: iconSize + 30,
                     color: iconColors,
                   ),
                 ),
@@ -843,7 +661,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 child: Center(
                   child: Icon(
                     DevIcons.luaPlainWordmark,
-                    size: iconSize,
+                    size: iconSize + 30,
                     color: iconColors,
                   ),
                 ),
@@ -870,13 +688,13 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                       FaIcon(
                         FontAwesomeIcons.plus,
                         color: iconColors,
-                        size: 45,
+                        size: iconSize,
                       ),
                       AutoSizeText(
                         "more",
                         style: GoogleFonts.getFont(
                           'Lato',
-                          fontSize: 22,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: iconColors,
                         ),
@@ -904,8 +722,8 @@ class _DesktopHomepageState extends State<DesktopHomepage>
     return Container(
       padding: EdgeInsets.only(
         top: Statics.DEVICE_HEIGHT(context) * 0.06,
-        left: Statics.DEVICE_WIDTH(context) * 0.2,
-        right: Statics.DEVICE_WIDTH(context) * 0.2,
+        left: Statics.DEVICE_WIDTH(context) * 0.1,
+        right: Statics.DEVICE_WIDTH(context) * 0.1,
       ),
       height: Statics.DEVICE_HEIGHT(context),
       width: Statics.DEVICE_WIDTH(context),
@@ -954,7 +772,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
         left: Statics.DEVICE_WIDTH(context) * 0.2,
         right: Statics.DEVICE_WIDTH(context) * 0.2,
       ),
-      height: Statics.DEVICE_HEIGHT(context) * 0.2,
+      //height: Statics.DEVICE_HEIGHT(context) * 0.2,
       width: Statics.DEVICE_WIDTH(context),
       color: Color(0XFFFF3c3252), //Color(0XFFFFeeeeee),
 
@@ -994,7 +812,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 ),
               ),
               SizedBox(
-                width: Statics.DEVICE_WIDTH(context) * 0.01,
+                width: Statics.DEVICE_WIDTH(context) * 0.01 + 20,
               ),
               InkWell(
                 onTap: () => launch('https://www.linkedin.com/in/vainqueur/'),
@@ -1013,6 +831,9 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: Statics.DEVICE_HEIGHT(context) * 0.05,
           ),
         ],
       ),
@@ -1035,14 +856,9 @@ class _DesktopHomepageState extends State<DesktopHomepage>
             fakebookHover = !fakebookHover;
           });
         },
-        child: AnimatedContainer(
-          height: !fakebookHover
-              ? Statics.DEVICE_HEIGHT(context) * 0.3
-              : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !fakebookHover
-              ? Statics.DEVICE_WIDTH(context) * 0.25
-              : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 175),
+        child: SizedBox(
+          height: Statics.DEVICE_HEIGHT(context) * 0.3,
+          width: Statics.DEVICE_WIDTH(context) * 0.35,
           child: Container(
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
@@ -1059,14 +875,15 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                         left: Statics.DEVICE_WIDTH(context) * 0.01,
                       ),
                       child: AutoSizeText(
-                        "Learn More",
+                        "Learn More.",
                         style: GoogleFonts.getFont(
                           'Lato',
-                          fontSize: 25,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Color(0XFFFF3c3252),
                         ),
                         minFontSize: 12,
+                        maxLines: 1,
                       ),
                     ),
                     SizedBox(
@@ -1076,16 +893,16 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 ),
                 Center(
                   child: AutoSizeText(
-                    "Fakebook - Mobile Application",
+                    "Fakebook",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       'Lato',
-                      fontSize: 45,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Color(0XFFFF3c3252),
                     ),
                     minFontSize: 12,
-                    maxLines: 2,
+                    maxLines: 1,
                   ),
                 ),
               ],
@@ -1112,14 +929,9 @@ class _DesktopHomepageState extends State<DesktopHomepage>
             lenderHover = !lenderHover;
           });
         },
-        child: AnimatedContainer(
-          height: !lenderHover
-              ? Statics.DEVICE_HEIGHT(context) * 0.3
-              : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !lenderHover
-              ? Statics.DEVICE_WIDTH(context) * 0.25
-              : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 175),
+        child: SizedBox(
+          height: Statics.DEVICE_HEIGHT(context) * 0.3,
+          width: Statics.DEVICE_WIDTH(context) * 0.35,
           child: Container(
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
@@ -1144,6 +956,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                           color: Color(0XFFFF3c3252),
                         ),
                         minFontSize: 12,
+                        maxLines: 1,
                       ),
                     ),
                     SizedBox(
@@ -1153,11 +966,11 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 ),
                 Center(
                   child: AutoSizeText(
-                    "Heavy Machinary Lending System",
+                    "Machine\nLender",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       'Lato',
-                      fontSize: 45,
+                      fontSize: 35,
                       fontWeight: FontWeight.bold,
                       color: Color(0XFFFF3c3252),
                     ),
@@ -1189,14 +1002,9 @@ class _DesktopHomepageState extends State<DesktopHomepage>
             portfolioHover = !portfolioHover;
           });
         },
-        child: AnimatedContainer(
-          height: !portfolioHover
-              ? Statics.DEVICE_HEIGHT(context) * 0.3
-              : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !portfolioHover
-              ? Statics.DEVICE_WIDTH(context) * 0.25
-              : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 175),
+        child: SizedBox(
+          height: Statics.DEVICE_HEIGHT(context) * 0.3,
+          width: Statics.DEVICE_WIDTH(context) * 0.35,
           child: Container(
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
@@ -1270,14 +1078,9 @@ class _DesktopHomepageState extends State<DesktopHomepage>
             detectorHover = !detectorHover;
           });
         },
-        child: AnimatedContainer(
-          height: !detectorHover
-              ? Statics.DEVICE_HEIGHT(context) * 0.3
-              : (Statics.DEVICE_HEIGHT(context) * 0.3) * 1.1,
-          width: !detectorHover
-              ? Statics.DEVICE_WIDTH(context) * 0.25
-              : (Statics.DEVICE_WIDTH(context) * 0.25) * 1.2,
-          duration: const Duration(milliseconds: 175),
+        child: SizedBox(
+          height: Statics.DEVICE_HEIGHT(context) * 0.3,
+          width: Statics.DEVICE_WIDTH(context) * 0.35,
           child: Container(
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
@@ -1297,11 +1100,12 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                         "Learn More.",
                         style: GoogleFonts.getFont(
                           'Lato',
-                          fontSize: 25,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Color(0XFFFF3c3252),
                         ),
                         minFontSize: 12,
+                        maxLines: 1,
                       ),
                     ),
                     SizedBox(
@@ -1311,7 +1115,7 @@ class _DesktopHomepageState extends State<DesktopHomepage>
                 ),
                 Center(
                   child: AutoSizeText(
-                    "Computer Vision - Vechical Speed Estimator",
+                    "Speed Estimator",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       'Lato',

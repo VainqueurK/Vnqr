@@ -24,8 +24,8 @@ class Responsive extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isCustom = (desktopParam != -1);
 
-    double tabletRes = !isCustom ? 1200 : tabletParam;
-    double desktopRes = !isCustom ? 1600 : tabletParam;
+    double tabletRes = !isCustom ? 768 : tabletParam;
+    double desktopRes = !isCustom ? 1750 : tabletParam;
 
     return LayoutBuilder(
       // If our width is more than desktopRes then we consider it a desktop
@@ -35,7 +35,7 @@ class Responsive extends StatelessWidget {
         }
         // If width it less then desktopRes and more then tabletRes we consider it as tablet
         else if (constraints.maxWidth >= tabletRes) {
-          return desktop;
+          return tablet;
         }
         // Or less then that we called it mobile
         else {

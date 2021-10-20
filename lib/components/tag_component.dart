@@ -19,7 +19,7 @@ class _TagCardState extends State<TagCard> {
           width: Statics.DEVICE_WIDTH(context) * 0.06,
           height: Statics.DEVICE_HEIGHT(context) * 0.03,
           constraints: const BoxConstraints(
-            minWidth: 60,
+            minWidth: 100,
             minHeight: 30,
           ),
           decoration: const BoxDecoration(

@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,17 +7,16 @@ import 'package:vainqueur_2/components/tag_component.dart';
 import 'package:vainqueur_2/config/statics.dart';
 import 'package:vainqueur_2/models/project.dart';
 import 'package:vainqueur_2/routing/router.dart';
-import 'package:vainqueur_2/routing/routes.dart';
 
-class DesktopProjectsPage extends StatefulWidget {
+class MobileProjectsPage extends StatefulWidget {
   late Project project;
-  DesktopProjectsPage({Key? key, required this.project}) : super(key: key);
+  MobileProjectsPage({Key? key, required this.project}) : super(key: key);
 
   @override
-  _DesktopProjectsPageState createState() => _DesktopProjectsPageState();
+  _MobileProjectsPageState createState() => _MobileProjectsPageState();
 }
 
-class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
+class _MobileProjectsPageState extends State<MobileProjectsPage> {
   Color? returnButton = Colors.grey[300];
   Color? gitIconTextColor = Color(0xffffdb2d52);
 
@@ -43,9 +41,9 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                      top: Statics.DEVICE_HEIGHT(context) * 0.02,
-                      left: Statics.DEVICE_WIDTH(context) * 0.2,
-                      right: Statics.DEVICE_WIDTH(context) * 0.2,
+                      top: Statics.DEVICE_HEIGHT(context) * 0.01,
+                      left: Statics.DEVICE_WIDTH(context) * 0.1,
+                      right: Statics.DEVICE_WIDTH(context) * 0.1,
                     ),
                     color: Colors.grey[200],
                     child: Column(
@@ -67,14 +65,11 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Row(
+                          child: Wrap(
+                              runSpacing: 20,
+                              spacing: 20,
                               children: widget.project.tags.tags
-                                  .map((e) => Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: 15,
-                                        ),
-                                        child: TagCard(tag: e),
-                                      ))
+                                  .map((e) => TagCard(tag: e))
                                   .toList()),
                         ),
                         SizedBox(
@@ -102,6 +97,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                             color: Color(0XFFFF3c3252),
                           ),
                           minFontSize: 12,
+                          maxLines: 15,
                         ),
                         SizedBox(
                           height: Statics.DEVICE_HEIGHT(context) * 0.05,
@@ -164,8 +160,8 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                   minHeight: 75,
                 ),
                 padding: EdgeInsets.only(
-                  left: Statics.DEVICE_WIDTH(context) * 0.2,
-                  right: Statics.DEVICE_WIDTH(context) * 0.2,
+                  left: Statics.DEVICE_WIDTH(context) * 0.1,
+                  right: Statics.DEVICE_WIDTH(context) * 0.1,
                 ),
                 height: Statics.DEVICE_HEIGHT(context) * 0.02,
                 width: Statics.DEVICE_WIDTH(context),
